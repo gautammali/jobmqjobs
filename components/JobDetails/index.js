@@ -23,7 +23,7 @@ export default function JobDetails({ data,fileData }) {
     } =data || {};
     return (
         <>
-            <div className="container" style={{display:'table',margin:'0 auto'}}>
+            <div className="container" style={{display:'table',margin:'0 auto',padding: '0 130px'}}>
                 <div className="grid sm:grid-cols-12 grid-cols-1 gap-5 my-5">
                     <div className="col-span-8 flex flex-col gap-5">
                         <div className="p-5 border">
@@ -47,7 +47,7 @@ export default function JobDetails({ data,fileData }) {
                                 ))}
                             </div>
                         </div>
-                        { fileData?.data && fileData?.data?.length !== 0 && <Attachment data={fileData?.data}/>  }                               
+                        { fileData?.data && fileData?.data?.length !== 0 && <Attachment data={fileData?.data}/>  }
                     </div>
                     <div className="col-span-4">
                         <div className="bg-[#f4f4f4] p-5 h-auto">

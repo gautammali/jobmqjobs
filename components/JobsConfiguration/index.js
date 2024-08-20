@@ -92,6 +92,14 @@ const JobsConfiguration = ({ jobId }) => {
     }
   return (
     <>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonOne) }}
+        />
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonTwo) }}
+        />
         <JobHeaderDetails {...data} /> 
         <JobDetails data={data} fileData={fileData} />
     </>

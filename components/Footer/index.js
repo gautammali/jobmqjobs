@@ -12,9 +12,9 @@ export default function Footer() {
     const quoteMessage = 'heck out this job at JOBMQ. Apply now and kickstart your career!';
     return (
         <>
-            <div className="bg-cyan-600 w-full h-20">
+            <div className="bg-cyan-600 w-full h-20" style={{padding:'0 130px'}}>
                 <div className="container flex justify-between items-center h-full">
-                    <div className="flex gap-3 items-center" style={{marginLeft:'200px'}}>
+                    <div className="flex gap-3 items-center">
 
                         <h3 className='text-white font-semibold'>Follow Us</h3>
                         <a href={socialURLS.facebook} target="_blank" rel="noopener noreferrer" className="border p-1 text-white">
@@ -57,7 +57,7 @@ export default function Footer() {
             </div>
             <footer className="bg-[#091732] bg-site-bg-300 text-white">
                 <div className="py-16">
-                    <div className="container flex flex-wrap" style={{marginLeft:'200px'}}>
+                    <div className="container flex flex-wrap" style={{padding:'0 130px'}}>
 
                         <div className="basis-full sm:basis-1/4 p-4 flex flex-col gap-2">
                             <Link href={currentServerConfiguration.mainApp}>
@@ -94,7 +94,7 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className="border-t container py-5" style={{marginLeft:'200px'}}>
+                <div className="border-t container py-5" style={{padding:'0 130px'}}>
                     <p className='text-center'>© 2018-2024 JobMQ. Designed with  Power by Allelife Consulting.</p>
                 </div>
             </footer >

@@ -5,38 +5,43 @@ import { currentServerConfiguration } from "../../config/index.constant"
 import { Fragment, useEffect, useState } from "react"
 import Image from "next/image"
 import { getUsersDetails } from "../../lib/jobsApi"
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 export function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 const UserInfo = () => {
-
     const [user, setUserDetails] = useState({})
     const [accessToken, setAccessToken] = useState('')
     const params = useParams()
-    const getUserInfo = async (accessToken1) => {
-        const token = accessToken1 || accessToken || sessionStorage?.getItem('accessToken');
-        !accessToken && setAccessToken(token)
-        const data = token && token !== 'undefined' && await getUsersDetails(token)
+
+    const getUserInfo = async (token) => {
+        const data = await getUsersDetails(token)
         setUserDetails(data?.data)
     }
 
     useEffect(() => {
-        if(params.accessToken === 'left_access'){
-            sessionStorage?.clear()
-        }else {
-            let accessToken1 = decodeURIComponent(sessionStorage?.getItem('accessToken'))
-            if(accessToken1 && accessToken1 !== 'undefined'){
-                const uData = async ()=>{
-                    setAccessToken(accessToken1)
-                    await getUserInfo(accessToken1)
-                }
-                uData()
+        let intervalId
+
+        const checkTokenAndFetchUser = async () => {
+            let token = sessionStorage?.getItem('accessToken');
+            if (token && token !== 'undefined') {
+                token = decodeURIComponent(token)
+                setAccessToken(token)
+                await getUserInfo(token)
+                clearInterval(intervalId)
             }
         }
-    }, [])
+
+        if (params.accessToken === 'left_access') {
+            sessionStorage?.clear()
+        } else {
+            intervalId = setInterval(checkTokenAndFetchUser, 1000)
+        }
+
+        return () => clearInterval(intervalId)
+    }, [params])
 
     const handleLogout = () => {
         localStorage.clear();
@@ -46,7 +51,7 @@ const UserInfo = () => {
 
     return (
         <>
-            { user?.email ?
+            {user?.email ?
                 <Menu as="div" className="relative ml-3 text-white">
                     <div className='flex items-center'>
                         <div className="flex flex-col gap-2 items-center">
@@ -113,7 +118,7 @@ const UserInfo = () => {
                     </Transition>
                 </Menu>
                 :
-                
+
                 <Menu as="div" className="relative ml-3">
                     <div>
                         <Menu.Button className="flex items-center gap-1 rounded-full text-blue-600 bg-white text-sm font-semibold hover:underline px-4 py-2">

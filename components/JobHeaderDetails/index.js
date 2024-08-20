@@ -44,10 +44,10 @@ const JobHeaderDetails = (
         handlePostedByJob }) => {
 
     return (
-        <div className="bg-[#f4f4f4] pt-8 pb-4">
+        <div className="bg-[#f4f4f4] pt-8 pb-4" style={{padding: '0 130px'}}>
             <div className="pt-8 pb-4">
                 <div className="container flex justify-between flex-wrap sm:flex-nowrap">
-                    <div className="" style={{marginLeft:'200px'}}>
+                    <div>
                         <div className="flex items-center gap-1 text-sky-600 font-medium cursor-pointer">
                             <a href={currentServerConfiguration.mainApp} className="hover:underline">
                                 Home
